@@ -85,15 +85,60 @@ def add_btn():
     print("Changes saved!")
 
 def fetch_btn():
-    id_sel = "SELECT * FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-    mycursor.execute(id_sel)
+    #id_sel = "SELECT * FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    #mycursor.execute(id_sel)
 
-    show_table = mycursor.fetchone()
+    #show_table = mycursor.fetchone()
 
-    table_win.config(text="\n".join(str(n)for n in show_table))
-    table_win.grid(row=8,column=1)
+    #table_win.config(text="\n".join(str(n)for n in show_table))
+    #table_win.grid(row=8,column=1)
 
-    print(show_table)
+    #print(show_table)
+
+#-------------------------------------------------------------------------------
+    fn_getter_data = "SELECT First_name FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(fn_getter_data)
+
+    fn_insert_data = mycursor.fetchone()
+    fn_box.insert(0,fn_insert_data)
+
+    ln_getter_data = "SELECT Last_name FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(ln_getter_data)
+
+    ln_insert_data = mycursor.fetchone()
+    ln_box.insert(0,ln_insert_data)
+
+    ades_getter_data = "SELECT Address FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(ades_getter_data)
+
+    ades_insert_data = mycursor.fetchone()
+    ades_box.insert(0,ades_insert_data)
+
+    dob_getter_data = "SELECT Date_of_Birth FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(dob_getter_data)
+
+    dob_insert_data = mycursor.fetchone()
+    dob_box.insert(0,dob_insert_data)
+
+    title_getter_data = "SELECT Title FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(title_getter_data)
+
+    title_insert_data = mycursor.fetchone()
+    title_box.insert(0,title_insert_data)
+
+    salary_getter_data = "SELECT Salary FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(salary_getter_data)
+
+    salary_insert_data = mycursor.fetchone()
+    salary_box.insert(0,salary_insert_data)
+
+    paswrd_getter_data = "SELECT Password FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+    mycursor.execute(paswrd_getter_data)
+
+    paswrd_insert_data = mycursor.fetchone()
+    paswrd_box.insert(0,paswrd_insert_data)
+    #getter_fn = mycursor.execute("SELECT First_name FROM my_app_data WHERE Employee_id =" + e_id_box.get())
+    #inserter_fn = fn_box.insert(0,str(getter_fn))
 
     e_id_box.delete(0,END)
 #alterer = " ALTER TABLE my_app_data ADD password int(6)"

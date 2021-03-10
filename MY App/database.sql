@@ -1,0 +1,1 @@
+SELECT * FROM my_app_database.my_app_data;

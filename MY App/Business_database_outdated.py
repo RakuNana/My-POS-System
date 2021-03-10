@@ -2,22 +2,21 @@ from tkinter import *
 import mysql.connector
 
 
-db = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            database="my_app_database",
-            passwd="password",
-            auth_plugin="mysql_native_password"
-    )
-
-mycursor = db.cursor()
-mycursor = db.cursor(buffered=True)
-
-
 def data_table():
     data_win = Tk()
     data_win.title("Employee Information")
 
+
+    db = mysql.connector.connect(
+                host="localhost",
+                user="root",
+                database="my_app_database",
+                passwd="password",
+                auth_plugin="mysql_native_password"
+        )
+
+    mycursor = db.cursor()
+    mycursor = db.cursor(buffered=True)
 
     main_frame = Frame(data_win)
     main_frame.grid(row=0,column=0)
@@ -86,58 +85,65 @@ def data_table():
         print("Changes saved!")
 
     def fetch_btn():
+        #id_sel = "SELECT * FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        #mycursor.execute(id_sel)
 
-        try:
-            fn_getter_data = "SELECT First_name FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(fn_getter_data)
+        #show_table = mycursor.fetchone()
 
-            fn_insert_data = mycursor.fetchone()
-            fn_box.insert(0,fn_insert_data)
+        #table_win.config(text="\n".join(str(n)for n in show_table))
+        #table_win.grid(row=8,column=1)
 
-            ln_getter_data = "SELECT Last_name FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(ln_getter_data)
+        #print(show_table)
 
-            ln_insert_data = mycursor.fetchone()
-            ln_box.insert(0,ln_insert_data)
+    #-------------------------------------------------------------------------------
+        fn_getter_data = "SELECT First_name FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(fn_getter_data)
 
-            ades_getter_data = "SELECT Address FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(ades_getter_data)
+        fn_insert_data = mycursor.fetchone()
+        fn_box.insert(0,fn_insert_data)
 
-            ades_insert_data = mycursor.fetchone()
-            ades_box.insert(0,ades_insert_data)
+        ln_getter_data = "SELECT Last_name FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(ln_getter_data)
 
-            dob_getter_data = "SELECT Date_of_Birth FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(dob_getter_data)
+        ln_insert_data = mycursor.fetchone()
+        ln_box.insert(0,ln_insert_data)
 
-            dob_insert_data = mycursor.fetchone()
-            dob_box.insert(0,dob_insert_data)
+        ades_getter_data = "SELECT Address FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(ades_getter_data)
 
-            title_getter_data = "SELECT Title FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(title_getter_data)
+        ades_insert_data = mycursor.fetchone()
+        ades_box.insert(0,ades_insert_data)
 
-            title_insert_data = mycursor.fetchone()
-            title_box.insert(0,title_insert_data)
+        dob_getter_data = "SELECT Date_of_Birth FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(dob_getter_data)
 
-            salary_getter_data = "SELECT Salary FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(salary_getter_data)
+        dob_insert_data = mycursor.fetchone()
+        dob_box.insert(0,dob_insert_data)
 
-            salary_insert_data = mycursor.fetchone()
-            salary_box.insert(0,salary_insert_data)
+        title_getter_data = "SELECT Title FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(title_getter_data)
 
-            paswrd_getter_data = "SELECT Password FROM my_app_data WHERE Employee_id =" + e_id_box.get()
-            mycursor.execute(paswrd_getter_data)
+        title_insert_data = mycursor.fetchone()
+        title_box.insert(0,title_insert_data)
 
-            paswrd_insert_data = mycursor.fetchone()
-            paswrd_box.insert(0,paswrd_insert_data)
-            #getter_fn = mycursor.execute("SELECT First_name FROM my_app_data WHERE Employee_id =" + e_id_box.get())
-            #inserter_fn = fn_box.insert(0,str(getter_fn))
+        salary_getter_data = "SELECT Salary FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(salary_getter_data)
 
-            e_id_box.delete(0,END)
-        #alterer = " ALTER TABLE my_app_data ADD password int(6)"
+        salary_insert_data = mycursor.fetchone()
+        salary_box.insert(0,salary_insert_data)
 
-        #mycursor.execute(alterer)
-        except:
-            print(" No ID Found!!!")
+        paswrd_getter_data = "SELECT Password FROM my_app_data WHERE Employee_id =" + e_id_box.get()
+        mycursor.execute(paswrd_getter_data)
+
+        paswrd_insert_data = mycursor.fetchone()
+        paswrd_box.insert(0,paswrd_insert_data)
+        #getter_fn = mycursor.execute("SELECT First_name FROM my_app_data WHERE Employee_id =" + e_id_box.get())
+        #inserter_fn = fn_box.insert(0,str(getter_fn))
+
+        e_id_box.delete(0,END)
+    #alterer = " ALTER TABLE my_app_data ADD password int(6)"
+
+    #mycursor.execute(alterer)
     #-------------------------------------------------------------------------------
     data_label = Label(label_frame,text= "Add/Edit entry")
     data_label.grid(row=0,column=1)

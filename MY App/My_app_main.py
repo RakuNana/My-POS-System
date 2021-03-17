@@ -1,6 +1,8 @@
 from tkinter import *
 from datetime import *
 import Business_database
+import Timer_Tracker
+import entity
 import mysql.connector
 
 
@@ -41,6 +43,7 @@ class NumberPad:
         btn_0 = Button(master,text=0,command=button_zero)
         btn_0.grid(row=2,column=1)
 
+        global employ_data
         employ_data = Button(root,text="Enter Data" , command=data_entry)
         employ_data.grid(row=2,column=2)
 
@@ -59,41 +62,45 @@ class NumberPad:
 def button_zero():
     zero = password_box.insert(END,"0")
 
-
-def clock_in():
-    in_time = datetime.now()
-    print(in_time)
-
-
-def clock_out():
-    out_time = datetime.now()
-    print(out_time - in_time)
-
-
 def data_entry():
+    employ_data["state"] = DISABLED
     Business_database.data_table()
-    print("works")
 
-def enter_btn():
-    password_box.delete(0,END)
 
 def clear_btn():
     password_box.delete(0,END)
+    employ_data["state"] = DISABLED
 
 def match_id():
     try:
         pw_match = password_box.get()
-        #get_password ="SELECT * FROM my_app_data WHERE Password = "  + pw_match
+
+        if pw_match == "0000":
+            employ_data["state"] = NORMAL
+            print("unlocked")
+        else:
+            print("locked")
+
+        #unlock_data = "SELECT First_name , Last_name FROM my_app_data WHERE Password= 2728"
         get_title = "SELECT First_name , Last_name FROM my_app_data WHERE Password= " + pw_match
         mycursor.execute(get_title)
         pw_rec = mycursor.fetchone()
         print(pw_rec)
+
         password_box.delete(0,END)
         logged_in_label.config(text=" Logged in as : " + " ".join(pw_rec) )
 
+        entity.pass_number = pw_match
+        print(entity.pass_number)
+
+        #entity.pass_id_names = "SELECT First_name , Last_name  WHERE Employee_id = " + pw_match
+
+        Timer_Tracker.time_tracker()
+
     except:
-        print("no employee")
-    pass
+        #employ_data["state"] = DISABLED
+        #print("no employee")
+        pass
 
 
 enter_btn = Button(root,text="Enter" ,bg="green", command=match_id)
@@ -101,7 +108,6 @@ enter_btn.grid(row=3,column=0)
 
 clear_btn = Button(root,text="Clear" , bg="red", command=clear_btn)
 clear_btn.grid(row=3,column=1)
-
 
 
 NP = NumberPad(root)

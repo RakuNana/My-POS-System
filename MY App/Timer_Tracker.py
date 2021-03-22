@@ -46,9 +46,10 @@ def clocking_in():
     global in_time
     in_time = datetime.now()
     print("Clocked in at : " + str(in_time))
-    info_inserter = "INSERT INTO Employee_Clock_in_out (EM_First_name ,EM_Last_name , Employee_Time_ID) VALUES(%s,%s,%s)"
-    info_getter = "SELECT First_name FROM my_app_data" , "SELECT Last_name FROM my_app_data" , "SELECT Employee_id FROM my_app_data WHERE = 1" 
+    info_inserter = "UPDATE my_app_data SET Clocked_in = %s WHERE Password = %s"
+    info_getter = (in_time , entity.pass_number)
     mycursor.execute(info_inserter,info_getter)
+
     db.commit()
 
 def clocking_out():

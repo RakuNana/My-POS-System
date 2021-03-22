@@ -25,7 +25,9 @@ pass_id_names = None
 #mycursor.execute("SHOW TABLES")
 #for x in mycursor:
     #print(x)
-
+    
+#mycursor.execute("ALTER TABLE my_app_data ADD Time_worked_week VARCHAR(50)")
+#db.commit()
 
 #mycursor.execute("CREATE TABLE my_app_data (First_name VARCHAR(20), Last_name VARCHAR(20), Address VARCHAR(50) , Date_of_Birth VARCHAR(20), Title VARCHAR(20) ,
 #Salary FLOAT(00.00), Employee_id int AUTO_INCREMENT , PRIMARY KEY (Employee_id))")

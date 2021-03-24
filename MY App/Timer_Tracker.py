@@ -45,17 +45,18 @@ def clocking_in():
     out_btn["state"] = NORMAL
     global in_time
     in_time = datetime.now()
-    print("Clocked in at : " + str(in_time))
-    info_inserter = "UPDATE my_app_data SET Clocked_in = %s WHERE Password = %s"
-    info_getter = (in_time , entity.pass_number)
-    mycursor.execute(info_inserter,info_getter)
+    name_getter = " SELECT First_name, Last_name FROM my_app_data WHERE Password = " + entity.pass_number
+    mycursor.execute(name_getter)
+    name_insert = mycursor.fetchall()
 
-    db.commit()
+    
+
+    print("Clocked in as : " + "".join(str(name_insert)[2:-2]) + " at: " + str(in_time.strftime("%y-%m-%d,%H:%M:%S")))
 
 def clocking_out():
     in_btn["state"] = NORMAL
     out_btn["state"] = DISABLED
     global out_time
     out_time = datetime.now()
-    print("Clocked out at : " + str(out_time))
+    print("Clocked out at : " + str(out_time.strftime("%y-%m-%d,%H:%M:%S")))
     print(out_time - in_time)
